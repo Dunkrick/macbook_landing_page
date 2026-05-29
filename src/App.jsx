@@ -1,12 +1,14 @@
 import Hero from "./components/Hero.jsx"
 import NavBar from "./components/NavBar.jsx"
+import ProductViewer from "./components/ProductViewer.jsx"
 
 const App = () => {
 
-    return(
+    return (
         <main>
-             <NavBar />
-             <Hero />
+            <NavBar />
+            <Hero />
+            <ProductViewer />
         </main>
     )
 }
