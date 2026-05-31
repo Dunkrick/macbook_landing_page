@@ -4,6 +4,10 @@ import ProductViewer from "./components/ProductViewer.jsx"
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/all"
 import Showcase from "./components/Showcase.jsx";
+import Performance from "./components/Performance.jsx";
+import Features from "./components/Features.jsx";
+import Highlights from "./components/Highlights.jsx";
+import Footer from "./components/Footer.jsx";
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -15,8 +19,11 @@ const App = () => {
             <Hero />
             <ProductViewer />
             <Showcase />
-            {/* Spacer: needed because ScrollTrigger pin requires scroll room below */}
             <div style={{ height: '100vh' }} />
+            <Performance />
+            <Features />
+            <Highlights />
+            <Footer />
         </main>
     )
 }
