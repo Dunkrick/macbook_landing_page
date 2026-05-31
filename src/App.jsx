@@ -19,7 +19,6 @@ const App = () => {
             <Hero />
             <ProductViewer />
             <Showcase />
-            <div style={{ height: '100vh' }} />
             <Performance />
             <Features />
             <Highlights />
