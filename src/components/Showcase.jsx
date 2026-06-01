@@ -18,9 +18,10 @@ const Showcase = () => {
             });
 
             timeline
-                .to('.mask img', {
-                    scale: 1
-                }).to('.content', { opacity: 1, y: 0, ease: 'power1.in' });
+                .fromTo('.mask img', 
+                    { scale: 80 },
+                    { scale: 1.1 }
+                ).to('.content', { opacity: 1, y: 0, ease: 'power1.in' });
         }
     }, [isTablet])
 
