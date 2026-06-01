@@ -36,36 +36,36 @@ const Showcase = () => {
             <div className="content">
                 <div className="wrapper">
                     <div className="lg:max-w-md">
-                        <h2>Rocket Chip</h2>
+                        <h2>M3 Pro</h2>
 
                         <div className="space-y-5 mt-7 pe-10">
                             <p>
-                                Introducing {" "}
+                                Powered by{" "}
                                 <span className="text-white">
-                                    M4, the next generation of Apple silicon
+                                    Apple M3 Pro - 12 core CPU, 18 core GPU, 18GB unified memory
                                 </span>
-                                . M4 powers
+                                . The engine behind every render, every build, every beat.
                             </p>
                             <p>
-                                It drives Apple Intelligence on iPad Pro, so you can write, create, and accomplish more with ease. All in a design that's unbelievably thin, light, and powerful.
+                                Edit 4K timelines in DaVinci Resolve while running a full dev environment in the background. No throttling. No fan noise. Just flow.
                             </p>
                             <p>
-                                A brand-new display engine delivers breathtaking precision, color accuracy, and brightness. And a next-gen GPU with hardware-accelerated ray tracing brings console-level graphics to your fingertips.
+                                Hardware-accelerated ray tracing, ProRes encoding, and a Liquid Retina XDR display that makes every frame look exactly as you intended.
                             </p>
-                            <p className="text-primary">Learn more about Apple Intelligence</p>
+                            <p className="text-primary">See what M3 Pro can do →</p>
                         </div>
                     </div>
 
                     <div className="max-w-3xs space-y-14">
                         <div className="space-y-2">
                             <p>Up to</p>
-                            <h3>4x faster</h3>
-                            <p>pro rendering performance than M2</p>
+                            <h3>3x faster</h3>
+                            <p>GPU rendering than M1 Pro</p>
                         </div>
                         <div className="space-y-2">
                             <p>Up to</p>
-                            <h3>1.5x faster</h3>
-                            <p>CPU performance than M2</p>
+                            <h3>22 hrs</h3>
+                            <p>battery life for all-day sessions</p>
                         </div>
                     </div>
                 </div>

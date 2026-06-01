@@ -1,16 +1,45 @@
-# React + Vite
+#  x Rithwick: One Machine. Everything.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A highly personalised, Apple inspired landing page built as a creative showcase. It perfectly captures my daily workflow as a multidisciplinary creator and engineer using my MacBook Pro M3 Pro (16", 18GB RAM, 512GB SSD).
 
-Currently, two official plugins are available:
+## 🚀 The Narrative
+Rather than standard Apple marketing copy, this page tells *my* story. 
+From tearing through 4K timelines in **DaVinci Resolve**, to laying down tracks in **GarageBand**, iterating UI in **Figma**, running dev servers with **Antigravity IDE**, and rendering 3D scenes in **Blender**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This machine handles the heavy stuff and breezes through the rest.
 
-## React Compiler
+## 🛠️ Tech Stack
+- **React.js** - Component-based architecture
+- **GSAP & ScrollTrigger** - Complex, scroll-linked animations and pinning
+- **Three.js & React Three Fiber (R3F)** - Interactive 3D MacBook Pro model rendering
+- **Tailwind CSS v4** - Utility-first, responsive styling
+- **Vite** - Lightning-fast build tool
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Key Features
+- **Cinematic Scroll Animations** - Smooth, buttery transitions powered by GSAP.
+- **Interactive 3D Model** - A fully rendered, scroll-reactive 3D MacBook model syncing with video textures.
+- **Personalized UI/UX** - Clean, Apple aesthetic design merged with my own creative identity ("Built with passion on a MacBook Pro").
+- **Responsive Design** - Looks incredible whether you're viewing on a campus phone or a studio XDR display.
 
-## Expanding the ESLint configuration
+## 🏃‍♂️ Running Locally
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Dunkrick/gsap_macbook_landing.git
+   cd gsap_macbook_landing
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+## 👨‍💻 About Me
+I'm an engineering student who loves living at the intersection of design, filmmaking, music, and code. This project is a reflection of that hybrid identity - "Built for creators who code."
+
+© 2026 Rithwick. Built with passion on a MacBook Pro.

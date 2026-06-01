@@ -66,7 +66,7 @@ const Performance = () => {
 
     return (
         <section id="performance" ref={sectionRef}>
-            <h2>Next-level graphics performance. Game on.</h2>
+            <h2>Handles the heavy stuff. Breezes through the rest.</h2>
 
             <div className="wrapper">
                 {performanceImages.map((item, index) => (
@@ -81,16 +81,14 @@ const Performance = () => {
 
             <div className="content">
                 <p>
-                    Run graphics-intensive workflows with a responsiveness that keeps up
-                    with your imagination. The M4 family of chips features a GPU with a
-                    second-generation hardware-accelerated ray tracing engine that renders
-                    images faster, so{" "}
+                    Some days it's a 4K DaVinci Resolve timeline with multiple color
+                    nodes. Other days it's a quick Reel edit between classes. The M3 Pro
+                    doesn't care - it handles both without breaking a sweat.{" "}
                     <span className="text-white">
-                        gaming feels more immersive and realistic than ever.
+                        An 18-core GPU with hardware-accelerated ray tracing
                     </span>{" "}
-                    And Dynamic Caching optimizes fast on-chip memory to dramatically
-                    increase average GPU utilization — driving a huge performance boost
-                    for the most demanding pro apps and games.
+                    powers through ProRes exports, Blender viewports, and Figma prototypes
+                    with headroom to spare - all while the fans stay silent.
                 </p>
             </div>
         </section>

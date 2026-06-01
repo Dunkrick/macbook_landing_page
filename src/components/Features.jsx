@@ -94,7 +94,7 @@ const ModelScroll = () => {
 const Features = () => {
     return (
         <section id="features">
-            <h2>See it all in a new light.</h2>
+            <h2>Built for creators who code.</h2>
 
             <Canvas id="f-canvas" camera={{}}>
                 <StudioLights />

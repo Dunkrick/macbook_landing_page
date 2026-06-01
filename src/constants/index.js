@@ -1,10 +1,10 @@
 const navLinks = [
-    { label: "Store" },
     { label: "Mac" },
-    { label: "iPhone" },
-    { label: "Watch" },
-    { label: "Vision" },
-    { label: "AirPods" },
+    { label: "Code" },
+    { label: "Film" },
+    { label: "Design" },
+    { label: "Music" },
+    { label: "Contact" },
 ];
 
 const noChangeParts = [
@@ -78,36 +78,36 @@ const features = [
     {
         id: 1,
         icon: "/feature-icon1.svg",
-        highlight: "Email AI.",
-        text: "Summarize and draft replies to emails instantly, so you stay on top of your inbox.",
+        highlight: "DaVinci Resolve.",
+        text: "Edit 4K timelines, color grade with HDR precision, and export ProRes - all without dropping a frame.",
         styles: "left-5 md:left-20 top-[20%] opacity-0 translate-y-5",
     },
     {
         id: 2,
         icon: "/feature-icon2.svg",
-        highlight: "Image AI.",
-        text: "Generate or edit images with ease. Just type what you imagine, and let AI bring it to life.",
+        highlight: "GarageBand.",
+        text: "Sketch out beats, layer instruments, and experiment with sound - the studio that comes free with your Mac.",
         styles: "right-5 md:right-20 top-[30%] opacity-0 translate-y-5",
     },
     {
         id: 3,
         icon: "/feature-icon3.svg",
-        highlight: "Summarize AI.",
-        text: "Turn long articles, reports, or notes into clear, bite-sized summaries in seconds.",
+        highlight: "Figma.",
+        text: "Design interfaces, prototype flows, and iterate in real time - pixel-perfect on the Liquid Retina XDR display.",
         styles: "left-5 md:left-20 top-[50%] opacity-0 translate-y-5",
     },
     {
         id: 4,
         icon: "/feature-icon4.svg",
-        highlight: "AirDrop.",
-        text: "Wirelessly share photos, large files, and more between your iPhone, your Mac, & other devices.",
+        highlight: "Antigravity IDE.",
+        text: "AI-powered coding with agents that build alongside you - from full-stack apps to GSAP animations, all on one machine.",
         styles: "right-5 md:right-20 top-[70%] opacity-0 translate-y-5",
     },
     {
         id: 5,
         icon: "/feature-icon5.svg",
-        highlight: "Writing Tool.",
-        text: "Write smarter and faster, whether it’s blogs, essays, or captions, AI helps polish your words.",
+        highlight: "Blender.",
+        text: "Installed and ready for 3D modelling and rendering - M3 Pro's GPU is waiting for when you're ready to push it.",
         styles: "left-5 md:left-20 top-[90%] opacity-0 translate-y-5",
     },
 ];
@@ -121,11 +121,12 @@ const featureSequence = [
 ];
 
 const footerLinks = [
-    { label: "Privacy Policy", link: "#" },
-    { label: "Terms of Use", link: "#" },
-    { label: "Sales Policy", link: "#" },
-    { label: "Legal", link: "#" },
-    { label: "Site Map", link: "#" },
+    { label: "GitHub", link: "https://github.com/Dunkrick" },
+    { label: "LinkedIn", link: "https://www.linkedin.com/in/rithwick-gurram-599463304/" },
+    { label: "YouTube", link: "https://www.youtube.com/@DunkRick" },
+    { label: "Instagram", link: "https://www.instagram.com/dunkrick_/" },
+    { label: "X", link: "https://x.com/RithwickGurram" },
+    { label: "Portfolio", link: "https://dunkrick.github.io/Dunkrick" },
 ];
 
 export {
