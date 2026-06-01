@@ -265,7 +265,7 @@ body {
     }
 
     .content {
-      @apply mx-auto max-w-xl mt-24;
+      @apply relative z-10 mx-auto max-w-xl mt-24;
 
       p {
         @apply lg:h3-semibold base-semibold text-center translate-y-10 opacity-0 px-5;
