@@ -10,7 +10,7 @@ Title: macbook pro M3 16 inch 2024
 */
 
 import React, { useEffect } from 'react'
-import { useGLTF, useVideoTexture, Html } from '@react-three/drei'
+import { useGLTF, useTexture, Html } from '@react-three/drei'
 import useMacbookStore from '../../store';
 import { noChangeParts } from '../../constants';
 import { Color, SRGBColorSpace } from 'three';
@@ -18,9 +18,10 @@ import { Color, SRGBColorSpace } from 'three';
 
 export default function MacbookModel16(props: any) {
   const { nodes, materials, scene } = useGLTF('/models/macbook-16-transformed.glb') as any;
-  const { color, texture: textureUrl } = useMacbookStore();
+  const { color } = useMacbookStore();
 
-  const texture = useVideoTexture(textureUrl, { crossOrigin: 'Anonymous', muted: true, loop: true, playsInline: true });
+  const texture = useTexture('/screen.png');
+  texture.flipY = false;
   texture.colorSpace = SRGBColorSpace;
   texture.needsUpdate = true;
 
@@ -38,8 +39,8 @@ export default function MacbookModel16(props: any) {
     <group {...props} dispose={null}>
       {/* LAYER 5: BOTTOM CHASSIS */}
       <group name="layer_chassis">
-        <Html position={[0, -2, 5]} center transform>
-          <div className="explode-label opacity-0 border-2 border-blue bg-black px-4 py-2 font-bold text-blue tracking-widest uppercase text-xs whitespace-nowrap shadow-[4px_4px_0px_#CCFF00]">
+        <Html position={[0, -2, 5]} center>
+          <div className="explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap">
             Aluminum Shell
           </div>
         </Html>
@@ -51,8 +52,8 @@ export default function MacbookModel16(props: any) {
 
       {/* LAYER 4: BATTERY & COOLING */}
       <group name="layer_battery">
-        <Html position={[0, -2, -5]} center transform>
-          <div className="explode-label opacity-0 border-2 border-blue bg-black px-4 py-2 font-bold text-blue tracking-widest uppercase text-xs whitespace-nowrap shadow-[4px_4px_0px_#CCFF00]">
+        <Html position={[0, -2, -5]} center>
+          <div className="explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap">
             Battery & Cooling
           </div>
         </Html>
@@ -64,8 +65,8 @@ export default function MacbookModel16(props: any) {
 
       {/* LAYER 3: LOGIC BOARD */}
       <group name="layer_logic">
-        <Html position={[0, 0, 0]} center transform>
-          <div className="explode-label opacity-0 border-2 border-blue bg-black px-4 py-2 font-bold text-blue tracking-widest uppercase text-xs whitespace-nowrap shadow-[4px_4px_0px_#CCFF00]">
+        <Html position={[0, 0, 0]} center>
+          <div className="explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap">
             M3 Pro Logic Board
           </div>
         </Html>
@@ -77,8 +78,8 @@ export default function MacbookModel16(props: any) {
 
       {/* LAYER 2: KEYBOARD DECK */}
       <group name="layer_keyboard">
-        <Html position={[0, 2, 5]} center transform>
-          <div className="explode-label opacity-0 border-2 border-blue bg-black px-4 py-2 font-bold text-blue tracking-widest uppercase text-xs whitespace-nowrap shadow-[4px_4px_0px_#CCFF00]">
+        <Html position={[0, 2, 5]} center>
+          <div className="explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap">
             Keyboard & Trackpad
           </div>
         </Html>
@@ -90,8 +91,8 @@ export default function MacbookModel16(props: any) {
 
       {/* LAYER 1: SCREEN */}
       <group name="layer_screen">
-        <Html position={[0, -15, -23]} center transform>
-          <div className="explode-label opacity-0 border-2 border-blue bg-black px-4 py-2 font-bold text-blue tracking-widest uppercase text-xs whitespace-nowrap shadow-[4px_4px_0px_#CCFF00]">
+        <Html position={[0, -15, -23]} center>
+          <div className="explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap">
             Liquid Retina XDR
           </div>
         </Html>

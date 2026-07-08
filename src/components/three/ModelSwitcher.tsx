@@ -1,4 +1,3 @@
-import { PresentationControls } from "@react-three/drei";
 import * as THREE from 'three';
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
@@ -9,7 +8,7 @@ import MacbookModel16 from "../models/Macbook-16";
 
 // ─── constants ───────────────────────────────────────────────────────────────
 const ANIMATION_DURATION = 1;
-const OFFSET_DISTANCE    = 5;
+const OFFSET_DISTANCE    = 50;
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 const fadeMeshes = (group: THREE.Group | null, opacity: number) => {
@@ -58,21 +57,15 @@ const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
         }
     }, { dependencies: [scale] });
 
-    // ── drive rotation + explosion from scroll (useFrame = safe inside R3F) ──
-    // scroll 0..0.4  → full Y rotation
-    // scroll 0.4..1  → explode layers in Y
+    // ── drive explosion from scroll (useFrame = safe inside R3F) ──
     useFrame(() => {
         const t = window.__pvScroll ?? 0;
         const activeRef = showLarge ? largeRef : smallRef;
         const group = activeRef.current;
         if (!group) return;
 
-        // Rotation phase (0 → 0.4 of scroll)
-        const rotT = Math.min(t / 0.4, 1);
-        group.rotation.y = rotT * Math.PI * 2;
-
-        // Explosion phase (0.4 → 1 of scroll)
-        const expT = Math.max((t - 0.4) / 0.6, 0);
+        // Explosion phase maps directly to scroll (0 → 1)
+        const expT = t;
 
         const screen   = group.getObjectByName("layer_screen");
         const keyboard = group.getObjectByName("layer_keyboard");
@@ -80,32 +73,23 @@ const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
         const battery  = group.getObjectByName("layer_battery");
         const chassis  = group.getObjectByName("layer_chassis");
 
-        if (screen)   screen.position.y   =  expT * 6;
-        if (keyboard) keyboard.position.y =  expT * 3;
+        // Compress the explosion so it stays on screen
+        if (screen)   screen.position.y   =  expT * 1.5;
+        if (keyboard) keyboard.position.y =  expT * 0.75;
         if (logic)    logic.position.y    =  0;
-        if (battery)  battery.position.y  = -expT * 3;
-        if (chassis)  chassis.position.y  = -expT * 6;
+        if (battery)  battery.position.y  = -expT * 0.75;
+        if (chassis)  chassis.position.y  = -expT * 1.5;
     });
 
-    const controlsConfig = {
-        snap:    true,
-        speed:   1,
-        zoom:    1,
-        polar:   [-Math.PI / 4, Math.PI / 4] as [number, number],
-        azimuth: [-Infinity, Infinity] as [number, number],
-        config:  { mass: 1, tension: 0, friction: 26 },
-    };
-
     return (
-        // Single PresentationControls wrapping both models keeps one event context
-        <PresentationControls {...controlsConfig}>
+        <group>
             <group ref={largeRef}>
                 <MacbookModel16 scale={isMobile ? SCALE_LARGE_MOBILE : SCALE_LARGE_DESKTOP} />
             </group>
             <group ref={smallRef} position={[OFFSET_DISTANCE, 0, 0]}>
                 <MacbookModel14 scale={isMobile ? 0.03 : 0.06} />
             </group>
-        </PresentationControls>
+        </group>
     );
 };
 

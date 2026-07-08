@@ -13,14 +13,7 @@ import { mySpecs } from '../constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ─── Explode label data ───────────────────────────────────────────────────────
-const LABELS = [
-    { id: 'label-screen',   text: 'Liquid Retina XDR',  top: '12%' },
-    { id: 'label-keyboard', text: 'Keyboard & Trackpad', top: '30%' },
-    { id: 'label-logic',    text: 'M3 Pro Logic Board',  top: '50%' },
-    { id: 'label-battery',  text: 'Battery & Cooling',   top: '68%' },
-    { id: 'label-chassis',  text: 'Aluminum Shell',      top: '86%' },
-];
+
 
 const ProductViewer = () => {
     const { color, scale, setColor, setScale } = useMacbookStore();
@@ -62,48 +55,47 @@ const ProductViewer = () => {
         return () => clearTimeout(t);
     }, []);
 
+    // Dynamic logic for the title
+    const isExactMachine = scale === 0.08 && color === '#2e2c2e';
+    const titleText = isExactMachine ? "My Exact Machine." : "Custom Build.";
+    const sizeText = scale === 0.08 ? '16"' : '14"';
+    const colorText = color === '#2e2c2e' ? 'Space Black' : 'Silver';
+
     return (
         // pinRef wraps EVERYTHING so GSAP pins the correct DOM node
         <div ref={pinRef} id="product-viewer" className="relative h-screen bg-black overflow-hidden">
 
             {/* Title */}
-            <div className="absolute top-24 inset-x-0 z-20 text-center pointer-events-none">
-                <h2 className="text-white font-heading text-5xl lg:text-7xl uppercase leading-none">
-                    My Exact Machine.
+            <div className="relative top-10 lg:top-12 inset-x-0 z-20 text-center pointer-events-none px-4 md:px-8">
+                <h2 className="text-white font-heading text-4xl md:text-5xl lg:text-7xl uppercase leading-none text-balance mx-auto">
+                    {titleText}
                 </h2>
                 <p className="text-gray-400 font-sans text-sm mt-3 tracking-widest uppercase">
-                    MacBook Pro 16&quot; · M3 Pro · 18GB · Space Black
+                    MacBook Pro {sizeText} · M3 Pro · 18GB · {colorText}
                 </p>
             </div>
 
-            {/* DOM labels — absolutely positioned, fade in via onUpdate */}
-            <div className="absolute inset-0 pointer-events-none z-10">
-                {LABELS.map(l => (
-                    <div
-                        key={l.id}
-                        className="explode-label absolute right-8 lg:right-20 opacity-0 transition-none
-                                   bg-black border-2 border-sub-orange text-sub-orange
-                                   font-sans font-bold text-xs uppercase tracking-widest
-                                   px-4 py-2 shadow-[4px_4px_0px_var(--color-sub-orange)]"
-                        style={{ top: l.top }}
-                    >
-                        {l.text}
-                    </div>
-                ))}
-            </div>
+
 
             {/* 3D Canvas — fills the section */}
             <Canvas
                 camera={{ position: [0, 2, 5], fov: 50, near: 0.1, far: 100 }}
-                className="!absolute !inset-0"
+                className="!absolute !inset-x-0 !bottom-0"
                 gl={{ alpha: false, antialias: true }}
-                style={{ background: '#050505' }}
+                style={{ background: '#050505', top: '25%', height: '75%' }}
             >
                 <StudioLights />
                 <Suspense fallback={null}>
                     <ModelSwitcher scale={isMobile ? scale - 0.03 : scale} isMobile={isMobile} />
                 </Suspense>
-                <OrbitControls enableZoom={false} enablePan={false} />
+                <OrbitControls 
+                    enableZoom={false} 
+                    enablePan={false} 
+                    enableDamping 
+                    dampingFactor={0.05} 
+                    minPolarAngle={Math.PI / 3}
+                    maxPolarAngle={Math.PI / 1.5}
+                />
             </Canvas>
 
             {/* Controls */}
