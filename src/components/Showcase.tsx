@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Showcase = () => {
     const isTablet = useMediaQuery({ query: '(max-width: 1024px)' });
-    const maskImgRef = useRef<SVGSVGElement>(null);
+    const maskImgRef = useRef<HTMLImageElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const sectionRef = useRef<HTMLElement>(null);
 
@@ -50,28 +50,8 @@ const Showcase = () => {
                     onLoadedData={() => ScrollTrigger.refresh()}
                     className="grayscale contrast-125"
                 />
-                <div className="mask w-full h-full flex items-center justify-center">
-                    <svg
-                        ref={maskImgRef}
-                        viewBox="0 0 1920 1080"
-                        className="h-full"
-                        style={{ transformOrigin: 'center center' }}
-                    >
-                        <mask id="m3-mask">
-                            <rect width="1920" height="1080" fill="white" />
-                            <text
-                                x="960"
-                                y="600"
-                                textAnchor="middle"
-                                fontSize="320"
-                                fontFamily="Anton, sans-serif"
-                                fill="black"
-                            >
-                                M3 PRO.
-                            </text>
-                        </mask>
-                        <rect width="1920" height="1080" fill="black" mask="url(#m3-mask)" />
-                    </svg>
+                <div className="mask">
+                    <img ref={maskImgRef} src="/mask-logo.svg" alt="Apple Mask" />
                 </div>
             </div>
 
