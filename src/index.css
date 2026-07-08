@@ -120,6 +120,14 @@ h4 {
   opacity: 0.8;
 }
 
+@utility font-marker {
+  font-family: 'Permanent Marker', cursive;
+}
+
+@utility grunge-border {
+  filter: url(#rough-edge);
+}
+
 @utility btn-primary {
   @apply bg-sub-orange text-white border-2 border-zinc font-heading text-xl px-8 py-3 uppercase tracking-wide cursor-pointer transition-all duration-200;
   box-shadow: 4px 4px 0px var(--color-zinc);
@@ -287,7 +295,7 @@ h4 {
     }
 
     #canvas {
-      @apply !w-full !h-[80vh] lg: !h-dvh relative z-40;
+      @apply !w-full !h-[80vh] lg:!h-dvh relative z-40;
     }
   }
 

@@ -1,4 +1,4 @@
-# M3 Pro x Rithwick: One Machine. Everything.
+# M3 Pro: One Machine. Everything.
 
 A highly personalized, Suburbia Skateboards-inspired brutalist landing page built as a creative showcase. It captures my daily workflow as a multidisciplinary creator and engineer using my MacBook Pro M3 Pro (16", 18GB RAM, 512GB SSD).
 

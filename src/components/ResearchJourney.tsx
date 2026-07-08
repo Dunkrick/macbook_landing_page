@@ -60,8 +60,12 @@ const ResearchJourney = () => {
                         </div>
                         
                         {/* Sharp editorial card */}
-                        <div className="max-w-4xl z-10 space-y-6 p-8 md:p-14 relative bg-white border-4 border-zinc shadow-[12px_12px_0px_var(--color-zinc)]">
-                            <h3 className="text-sub-orange font-sans font-bold text-sm tracking-widest uppercase reveal-text bg-sub-orange/10 inline-block px-4 py-2 border-2 border-sub-orange">
+                        <div className="max-w-4xl z-10 space-y-6 p-8 md:p-14 relative bg-white border-4 border-zinc shadow-[12px_12px_0px_var(--color-zinc)] grunge-border">
+                            {/* Grungy marker tag */}
+                            <span className="absolute -top-5 right-6 rotate-[-6deg] font-marker text-sub-orange text-sm md:text-lg select-none bg-zinc text-white px-3 py-1 border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)]">
+                                #{chapter.id.toUpperCase()}
+                            </span>
+                            <h3 className="text-sub-orange font-sans font-bold text-sm tracking-widest uppercase reveal-text bg-sub-orange/10 inline-block px-4 py-2 border-2 border-sub-orange grunge-border">
                                 {chapter.date}
                             </h3>
                             <h2 className="text-4xl md:text-7xl font-heading text-zinc reveal-text uppercase leading-none mt-4">

@@ -111,7 +111,7 @@ const Features = () => {
     }, []);
 
     return (
-        <section id="features" className="bg-sub-paper bg-grain relative border-b-[6px] border-zinc text-zinc">
+        <section id="features" className="bg-sub-paper bg-grain relative border-b-[6px] border-zinc text-zinc grunge-border">
             <h2 className="text-zinc font-heading text-6xl lg:text-8xl uppercase leading-none text-center max-w-4xl mx-auto drop-shadow-[4px_4px_0px_var(--color-sub-orange)] pt-20">A day on my machine.</h2>
 
             <Canvas id="f-canvas" camera={{}}>
@@ -122,7 +122,7 @@ const Features = () => {
 
             <div className="absolute inset-0 pointer-events-none">
                 {features.map((feature, index) => (
-                    <div key={feature.id} className={clsx('box', `box${index + 1}`, feature.styles, 'bg-white border-4 border-zinc shadow-[12px_12px_0px_var(--color-zinc)] p-6 pointer-events-auto')}>
+                    <div key={feature.id} className={clsx('box', `box${index + 1}`, feature.styles, 'bg-white border-4 border-zinc shadow-[12px_12px_0px_var(--color-zinc)] p-6 pointer-events-auto grunge-border')}>
                         <img src={feature.icon} alt={feature.highlight} className="w-12 h-12 lg:w-16 lg:h-16 mb-4 object-contain" />
                         <p className="font-sans font-medium text-lg text-zinc/90 mt-2">
                             <span className="font-bold text-sub-orange bg-sub-orange/10 px-2 py-1 border border-sub-orange mr-2 inline-block">
