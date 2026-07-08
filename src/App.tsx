@@ -10,7 +10,7 @@ import Footer from "./components/Footer.js";
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/all"
 
-const ProductViewer = lazy(() => import("./components/ProductViewer.js"));
+import ProductViewer from "./components/ProductViewer.js";
 const Features = lazy(() => import("./components/Features.js"))
 
 gsap.registerPlugin(ScrollTrigger)
@@ -21,11 +21,7 @@ const App = () => {
             <NavBar />
             <Hero />
             <ResearchJourney />
-            <div>
-                <Suspense fallback={<div className="h-screen w-full flex items-center justify-center text-white">Loading 3D Experience...</div>}>
-                    <ProductViewer />
-                </Suspense>
-            </div>
+            <ProductViewer />
             <Showcase />
             <Performance />
             <div>
