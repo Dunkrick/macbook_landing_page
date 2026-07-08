@@ -313,13 +313,13 @@ h4 {
       .mask {
         @apply absolute h-full top-0 lg:-top-20 xl:top-0;
 
-        img {
+        img, svg {
           @apply h-full;
           transform: scale(80);
         }
 
         @media (max-width: 1024px) {
-          img {
+          img, svg {
             transform: scale(1);
           }
         }
