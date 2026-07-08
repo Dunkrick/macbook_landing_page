@@ -2,6 +2,7 @@ import { useMediaQuery } from "react-responsive";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { mySpecs } from "../constants";
+import MagneticCard from "./MagneticCard";
 
 const Highlights = () => {
     const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
@@ -31,7 +32,7 @@ const Highlights = () => {
 
             <div className="masonry max-w-6xl mx-auto">
                 <div className="left-column">
-                    <div className="bg-sub-paper border-4 border-zinc shadow-[8px_8px_0px_var(--color-sub-orange)] p-10 lg:pt-20 rounded-none h-full relative grunge-border">
+                    <MagneticCard className="bg-sub-paper border-4 border-zinc shadow-[8px_8px_0px_var(--color-sub-orange)] p-10 lg:pt-20 rounded-none h-full relative grunge-border overflow-hidden cursor-crosshair">
                         <img src="/laptop.png" alt="Laptop" />
                         <p className="font-heading text-4xl text-zinc mt-4 uppercase leading-none">
                             Fans heard in a year:
@@ -45,8 +46,8 @@ const Highlights = () => {
                         <span className="absolute bottom-6 right-6 rotate-[-12deg] font-marker text-sub-orange text-base md:text-xl select-none">
                             (only twice!)
                         </span>
-                    </div>
-                    <div className="bg-sub-blue border-4 border-zinc shadow-[8px_8px_0px_var(--color-zinc)] p-10 rounded-none flex items-center gap-7 relative grunge-border">
+                    </MagneticCard>
+                    <MagneticCard className="bg-sub-blue border-4 border-zinc shadow-[8px_8px_0px_var(--color-zinc)] p-10 rounded-none flex items-center gap-7 relative grunge-border overflow-hidden cursor-crosshair">
                         <img src="/sun.png" alt="Display" />
                         <p className="font-heading text-3xl text-white uppercase leading-none">Liquid Retina XDR. <br />
                             <span className="text-white/80 font-sans text-lg mt-2 block font-medium tracking-normal normal-case">
@@ -57,10 +58,10 @@ const Highlights = () => {
                         <span className="absolute top-4 right-4 rotate-[15deg] font-marker text-sub-pink text-sm select-none">
                             (so bright)
                         </span>
-                    </div>
+                    </MagneticCard>
                 </div>
                 <div className="right-column">
-                    <div className="bg-zinc border-4 border-sub-orange shadow-[8px_8px_0px_var(--color-sub-orange)] p-10 rounded-none flex items-center gap-7 relative grunge-border">
+                    <MagneticCard className="bg-zinc border-4 border-sub-orange shadow-[8px_8px_0px_var(--color-sub-orange)] p-10 rounded-none flex items-center gap-7 relative grunge-border overflow-hidden cursor-crosshair">
                         <img src="/ai.png" alt="Deal" />
                         <p className="font-heading text-4xl text-white uppercase leading-none">
                             <span className="text-sub-orange">{mySpecs.price.original} → {mySpecs.price.paid}</span>
@@ -73,8 +74,8 @@ const Highlights = () => {
                         <span className="absolute bottom-6 right-6 rotate-[8deg] font-marker text-sub-orange text-sm md:text-base select-none">
                             (basically new!)
                         </span>
-                    </div>
-                    <div className="bg-sub-paper border-4 border-zinc shadow-[8px_8px_0px_var(--color-sub-orange)] p-10 lg:pt-20 rounded-none h-full relative grunge-border">
+                    </MagneticCard>
+                    <MagneticCard className="bg-sub-paper border-4 border-zinc shadow-[8px_8px_0px_var(--color-sub-orange)] p-10 lg:pt-20 rounded-none h-full relative grunge-border overflow-hidden cursor-crosshair">
                         <img src="/battery.png" alt="Battery" />
                         <p className="font-heading text-5xl text-zinc uppercase leading-none mt-4">Up to
                             <span className="text-sub-green">{' '}22 hours{' '}</span>
@@ -85,7 +86,7 @@ const Highlights = () => {
                         <span className="absolute bottom-6 right-6 rotate-[-5deg] font-marker text-sub-orange text-base md:text-xl select-none">
                             (insane!)
                         </span>
-                    </div>
+                    </MagneticCard>
                 </div>
             </div>
         </section>
