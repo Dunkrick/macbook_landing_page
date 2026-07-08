@@ -61,17 +61,17 @@ const Highlights = () => {
                     </MagneticCard>
                 </div>
                 <div className="right-column">
-                    <MagneticCard className="bg-sub-orange border-4 border-zinc shadow-[8px_8px_0px_var(--color-zinc)] p-10 rounded-none flex items-center gap-7 relative grunge-border overflow-hidden cursor-crosshair">
+                    <MagneticCard className="bg-sub-paper border-4 border-zinc shadow-[8px_8px_0px_var(--color-sub-orange)] p-10 rounded-none flex items-center gap-7 relative grunge-border overflow-hidden cursor-crosshair">
                         <img src="/ai.png" alt="Deal" />
-                        <p className="font-heading text-4xl text-white uppercase leading-none">
-                            <span className="text-zinc">{mySpecs.price.original} → {mySpecs.price.paid}</span>
+                        <p className="font-heading text-4xl text-zinc uppercase leading-none">
+                            <span className="text-sub-orange">{mySpecs.price.original} → {mySpecs.price.paid}</span>
                             <br />
-                            <span className="text-white/80 font-sans text-lg block mt-4 font-medium tracking-normal normal-case">
+                            <span className="text-zinc/80 font-sans text-lg block mt-4 font-medium tracking-normal normal-case">
                                 Display model, ~40 days used. Basically brand new.
                                 Best investment I've made.
                             </span>
                         </p>
-                        <span className="absolute bottom-6 right-6 rotate-[8deg] font-marker text-zinc text-sm md:text-base select-none">
+                        <span className="absolute bottom-6 right-6 rotate-[8deg] font-marker text-sub-orange text-sm md:text-base select-none">
                             (basically new!)
                         </span>
                     </MagneticCard>
