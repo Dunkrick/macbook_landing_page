@@ -88,7 +88,7 @@ const Showcase = () => {
                                 <h3 className="tracking-normal text-white font-heading text-7xl leading-none pt-2">
                                     {insight.stat} <span className="text-4xl text-white/70">{insight.unit}</span>
                                 </h3>
-                                <p className="text-base font-medium opacity-90 font-sans">{insight.description.split('.')[0]}.</p>
+                                <p className="text-base font-medium text-white opacity-90 font-sans">{insight.description.split('.')[0]}.</p>
                             </div>
                         ))}
                     </div>
