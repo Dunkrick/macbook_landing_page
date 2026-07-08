@@ -239,7 +239,7 @@ h4 {
     }
 
     p:last-child {
-      @apply lg:h3-semibold base-semibold;
+      @apply font-heading text-dark-100 text-base lg:text-xl;
     }
   }
 
@@ -397,7 +397,7 @@ h4 {
       @apply relative z-10 mx-auto max-w-xl mt-24;
 
       p {
-        @apply lg:h3-semibold base-semibold text-center translate-y-10 opacity-0 px-5;
+        @apply font-heading text-dark-100 text-base lg:text-xl text-center translate-y-10 opacity-0 px-5;
       }
     }
   }
@@ -421,7 +421,7 @@ h4 {
       @apply max-w-xs absolute;
 
       p {
-        @apply lg:h3-semibold base-semibold;
+        @apply font-heading text-dark-100 text-base lg:text-xl;
       }
     }
   }
