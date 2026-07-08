@@ -1,24 +1,17 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Regular";
-  src: url("/fonts/regular.otf");
-}
+/* ═══════════════════════════════════════════════════════════════
+   FONT FACES — San Francisco-style font family
+   WHY: Custom fonts give the page a distinctive feel.
+   These are loaded from /public/fonts/ at build time.
+   ═══════════════════════════════════════════════════════════════ */
+/* Fonts now loaded via Google Fonts in index.html */
 
-@font-face {
-  font-family: "Medium";
-  src: url("/fonts/medium.otf");
-}
-
-@font-face {
-  font-family: "SemiBold";
-  src: url("/fonts/semibold.otf");
-}
-
-@font-face {
-  font-family: "Bold";
-  src: url("/fonts/bold.otf");
-}
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN TOKENS — Single source of truth for colors and fonts
+   WHY: Change --color-primary once, everything updates.
+   This is how professional design systems work.
+   ═══════════════════════════════════════════════════════════════ */
 
 * {
   scrollbar-color: var(--color-dark-100) var(--color-black);
@@ -33,14 +26,37 @@
 }
 
 @theme {
-  --font-regular: "Regular";
-  --font-medium: "Medium";
-  --font-semibold: "SemiBold";
-  --font-bold: "Bold";
-  --color-primary: #0071e3;
+  --font-sans: "DM Mono", monospace;
+  --font-heading: "Anton", sans-serif;
+
+  /* Suburbia Color Palette */
+  --color-sub-orange: #e8490f;
+  --color-sub-blue: #4f5ef7;
+  --color-sub-green: #7a9918;
+  --color-sub-pink: #e8c5e0;
+  --color-sub-paper: #f5f2eb;
+
+  --color-blue: #CCFF00; /* Neon Green accent */
+  --color-blue-100: #e5ff80;
+  --color-gray: #1a1a1a;
+  --color-gray-100: #333333;
+  --color-gray-200: #4d4d4d;
+  --color-gray-300: #b3b3b3;
+  --color-black: #111111; /* Deep, rich black */
+  --color-zinc: #27272a;
+  --color-white: #ffffff;
+  
+  /* Legacy Apple colors (Needed so existing components don't break) */
+  --color-primary: #e8490f; /* Map primary to Suburbia orange */
   --color-dark-100: #86868b;
   --color-dark-200: #2e2e30;
   --color-light-100: #adb5bd;
+
+  /* Legacy Apple fonts (Needed so existing components don't break) */
+  --font-regular: "DM Mono", monospace;
+  --font-medium: "DM Mono", monospace;
+  --font-semibold: "Anton", sans-serif;
+  --font-bold: "Anton", sans-serif;
 }
 
 html {
@@ -52,10 +68,24 @@ html {
 body {
   width: 100vw;
   overflow-x: hidden;
-  background-color: #000;
-  color: var(--color-dark-100);
-  font-family: var(--font-semibold);
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--font-sans);
 }
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UTILITY CLASSES — Reusable layout helpers
+   WHY: Instead of typing 'flex items-center justify-center'
+   everywhere, we define it once as 'flex-center'.
+   ═══════════════════════════════════════════════════════════════ */
 
 @utility flex-center {
   @apply flex items-center justify-center;
@@ -74,23 +104,73 @@ body {
 }
 
 @utility h3-semibold {
-  @apply font-semibold text-xl text-dark-100;
+  @apply font-heading text-xl text-dark-100;
 }
 
 @utility base-semibold {
-  @apply font-semibold text-base text-dark-100;
+  @apply font-heading text-base text-dark-100;
 }
 
 @utility small-medium {
-  @apply font-medium text-xs;
+  @apply font-sans text-xs;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   SUBURBIA UTILITIES — Grain texture & Button system
+   ═══════════════════════════════════════════════════════════════ */
+
+@utility bg-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-blend-mode: overlay;
+  opacity: 0.8;
+}
+
+@utility btn-primary {
+  @apply bg-sub-orange text-white border-2 border-zinc font-heading text-xl px-8 py-3 uppercase tracking-wide cursor-pointer transition-all duration-200;
+  box-shadow: 4px 4px 0px var(--color-zinc);
+}
+
+@utility btn-primary:hover {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px var(--color-zinc);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPONENT STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
 @layer components {
+
+  /* ─────────────────────────────────────────────────────────── */
+  /* NAVIGATION                                                  */
+  /* Glassmorphism on scroll + scroll progress indicator          */
+  /* ─────────────────────────────────────────────────────────── */
+
   header {
-    @apply w-screen fixed top-0 left-0 z-50 flex-center bg-black min-h-[7vh];
+    @apply w-screen fixed top-0 left-0 z-50 flex flex-col items-center bg-black/80 min-h-[7vh];
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+
+    /* Scroll progress bar — thin line at the very top */
+    .scroll-progress {
+      @apply w-full h-[2px] bg-transparent;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      .scroll-progress-fill {
+        @apply h-full;
+        width: 0%;
+        background: linear-gradient(90deg, #0071e3, #c959dd, #ff2e54);
+        transition: width 0.05s linear;
+      }
+    }
 
     nav {
       @apply container mx-auto flex-between px-5 2xl:px-0;
+
+      .nav-brand {
+        @apply no-underline;
+      }
 
       img {
         @apply cursor-pointer hover:-translate-y-0.5 transition-all duration-300 ease-in-out;
@@ -109,6 +189,20 @@ body {
       }
     }
   }
+
+  /* Glassmorphism when scrolled — backdrop blur + transparency */
+  /* WHY: A solid black nav feels heavy. Glassmorphism lets the
+     content bleed through subtly, making the nav feel lightweight. */
+  header.nav-scrolled {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* ─────────────────────────────────────────────────────────── */
+  /* HERO                                                        */
+  /* ─────────────────────────────────────────────────────────── */
 
   #hero {
     @apply h-fit lg:h-[80vh] col-center mt-40 lg:mt-20 2xl:mt-[7vh];
@@ -129,20 +223,36 @@ body {
       @apply mx-auto lg:translate-y-5 2xl:translate-y-0;
     }
 
-    button {
-      @apply relative z-10 bg-primary text-white py-2 px-6 mt-10 lg:mt-0 mb-5 rounded-full font-semibold text-lg cursor-pointer hover:bg-white hover:text-black transition-all duration-300 ease-in-out;
+    .hero-subline {
+      @apply relative z-10 max-w-xl text-center text-dark-100 font-regular text-base lg:text-lg mt-6 px-5 leading-relaxed;
     }
 
-    p {
+    button {
+      @apply relative z-10 bg-primary text-white py-2 px-6 mt-6 lg:mt-4 mb-5 rounded-full font-semibold text-lg cursor-pointer hover:bg-white hover:text-black transition-all duration-300 ease-in-out;
+
+      a {
+        @apply text-inherit no-underline;
+      }
+    }
+
+    p:last-child {
       @apply lg:h3-semibold base-semibold;
     }
   }
+
+  /* ─────────────────────────────────────────────────────────── */
+  /* PRODUCT VIEWER (3D Interactive Model)                       */
+  /* ─────────────────────────────────────────────────────────── */
 
   #product-viewer {
     @apply container relative min-h-[93vh] mx-auto px-5 2xl:px-0 mt-40;
 
     h2 {
       @apply text-white font-semibold text-3xl lg:text-6xl;
+    }
+
+    .product-viewer-subtitle {
+      @apply text-dark-100 font-regular text-base lg:text-lg mt-2;
     }
 
     .controls {
@@ -171,12 +281,24 @@ body {
           @apply size-8 rounded-full cursor-pointer bg-white text-black flex-center;
         }
       }
+
+      .config-badge {
+        @apply mt-3 text-center;
+
+        p {
+          @apply text-xs text-dark-100 font-regular tracking-wide;
+        }
+      }
     }
 
     #canvas {
       @apply !w-full !h-[80vh] lg:!h-dvh relative z-40;
     }
   }
+
+  /* ─────────────────────────────────────────────────────────── */
+  /* SHOWCASE (M3 Pro Deep Dive)                                 */
+  /* ─────────────────────────────────────────────────────────── */
 
   #showcase {
     @apply relative;
@@ -220,6 +342,10 @@ body {
       }
     }
   }
+
+  /* ─────────────────────────────────────────────────────────── */
+  /* PERFORMANCE                                                 */
+  /* ─────────────────────────────────────────────────────────── */
 
   #performance {
     @apply w-dvw h-full overflow-hidden pt-20 lg:pt-20 flex flex-col items-center relative;
@@ -273,6 +399,10 @@ body {
     }
   }
 
+  /* ─────────────────────────────────────────────────────────── */
+  /* FEATURES (Daily Workflow + 3D Model)                        */
+  /* ─────────────────────────────────────────────────────────── */
+
   #features {
     @apply pt-40 relative;
 
@@ -292,6 +422,10 @@ body {
       }
     }
   }
+
+  /* ─────────────────────────────────────────────────────────── */
+  /* HIGHLIGHTS (The Numbers)                                    */
+  /* ─────────────────────────────────────────────────────────── */
 
   #highlights {
     @apply container mx-auto lg:py-40 max-lg:px-5;
@@ -343,9 +477,7 @@ body {
 
           background: #1d1d1f;
           background-clip: padding-box;
-          /* !important */
           border: 3px solid transparent;
-          /* !important */
 
           ::before {
             content: "";
@@ -354,9 +486,7 @@ body {
             inset: 0px;
             z-index: -1;
             margin: -5px;
-            /* !important */
             border-radius: 24px;
-            /* !important */
             background: linear-gradient(91deg,
                 #0096ff 0%,
                 #bb64ff 42%,
@@ -398,14 +528,18 @@ body {
     }
   }
 
+  /* ─────────────────────────────────────────────────────────── */
+  /* FOOTER                                                      */
+  /* ─────────────────────────────────────────────────────────── */
+
   footer {
     @apply container mx-auto py-7 max-lg:px-5;
 
     .info {
-      @apply flex-between;
+      @apply flex-between flex-col lg:flex-row gap-2;
 
       p {
-        @apply text-sm font-medium;
+        @apply text-sm font-medium text-center lg:text-left;
 
         span {
           @apply text-primary mx-0.5;
