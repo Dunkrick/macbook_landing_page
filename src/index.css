@@ -318,9 +318,12 @@ h4 {
 
     .media {
       @apply relative lg:overflow-hidden;
+      aspect-ratio: 16 / 9;
+      min-height: 56.25vw; /* strict fallback for 16:9 on full width */
+      background-color: #000;
 
       video {
-        @apply w-full object-cover object-center;
+        @apply w-full h-full object-cover object-center;
       }
 
       .mask {

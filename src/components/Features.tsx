@@ -25,25 +25,6 @@ const ModelScroll = () => {
     const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
     const { setTexture } = useMacbookStore();
 
-    // Pre-load all feature videos so they're ready when scroll triggers them
-    // WHY: Without preloading, the first frame would show a blank screen
-    // while the video downloads. This creates hidden <video> elements
-    // that start loading immediately.
-    useEffect(() => {
-        featureSequence.forEach((feature) => {
-            const v = document.createElement('video');
-
-            Object.assign(v, {
-                src: feature.videoPath,
-                muted: true,
-                playsInline: true,
-                preload: 'auto',
-                crossOrigin: 'anonymous',
-            });
-
-            v.load();
-        })
-    }, [])
 
     useGSAP(() => {
         // Timeline 1: 3D model rotation (pinned, follows scroll)

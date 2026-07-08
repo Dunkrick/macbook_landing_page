@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
 import { Suspense, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -102,6 +103,7 @@ const ProductViewer = () => {
                 <Suspense fallback={null}>
                     <ModelSwitcher scale={isMobile ? scale - 0.03 : scale} isMobile={isMobile} />
                 </Suspense>
+                <OrbitControls enableZoom={false} enablePan={false} />
             </Canvas>
 
             {/* Controls */}
