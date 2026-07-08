@@ -74,20 +74,20 @@ const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
         const chassis  = group.getObjectByName("layer_chassis");
 
         // Compress the explosion so it stays on screen
-        if (screen)   screen.position.y   =  expT * 1.5;
-        if (keyboard) keyboard.position.y =  expT * 0.75;
+        if (screen)   screen.position.y   =  expT * 4;
+        if (keyboard) keyboard.position.y =  expT * 2;
         if (logic)    logic.position.y    =  0;
-        if (battery)  battery.position.y  = -expT * 0.75;
-        if (chassis)  chassis.position.y  = -expT * 1.5;
+        if (battery)  battery.position.y  = -expT * 2;
+        if (chassis)  chassis.position.y  = -expT * 4;
     });
 
     return (
-        <group>
+        <group position={[0, -1, 0]}>
             <group ref={largeRef}>
-                <MacbookModel16 scale={isMobile ? SCALE_LARGE_MOBILE : SCALE_LARGE_DESKTOP} />
+                <MacbookModel16 scale={isMobile ? SCALE_LARGE_MOBILE : SCALE_LARGE_DESKTOP} isActive={showLarge} />
             </group>
             <group ref={smallRef} position={[OFFSET_DISTANCE, 0, 0]}>
-                <MacbookModel14 scale={isMobile ? 0.03 : 0.06} />
+                <MacbookModel14 scale={isMobile ? 0.03 : 0.06} isActive={!showLarge} />
             </group>
         </group>
     );

@@ -10,12 +10,14 @@ Title: macbook pro M3 16 inch 2024
 */
 
 import React, { useEffect } from 'react'
+import clsx from 'clsx'
 import { useGLTF, useTexture, Html } from '@react-three/drei'
 import useMacbookStore from '../../store';
 import { noChangeParts } from '../../constants';
 import { Color, SRGBColorSpace } from 'three';
 
 export default function MacbookModel14(props: any) {
+  const { isActive, ...restProps } = props;
   const { nodes, materials, scene } = useGLTF('/models/macbook-14-transformed.glb') as any;
   const { color } = useMacbookStore();
 
@@ -35,11 +37,11 @@ export default function MacbookModel14(props: any) {
   }, [color, scene]);
 
   return (
-    <group {...props} dispose={null}>
+    <group {...restProps} dispose={null}>
       {/* LAYER 5: BOTTOM CHASSIS */}
       <group name="layer_chassis">
         <Html position={[0, -2, 5]} center>
-          <div className="explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap">
+          <div className={clsx("explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap", !isActive && "hidden")}>
             Aluminum Shell
           </div>
         </Html>
@@ -52,7 +54,7 @@ export default function MacbookModel14(props: any) {
       {/* LAYER 4: BATTERY & COOLING */}
       <group name="layer_battery">
         <Html position={[0, -2, -5]} center>
-          <div className="explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap">
+          <div className={clsx("explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap", !isActive && "hidden")}>
             Battery & Cooling
           </div>
         </Html>
@@ -65,7 +67,7 @@ export default function MacbookModel14(props: any) {
       {/* LAYER 3: LOGIC BOARD */}
       <group name="layer_logic">
         <Html position={[0, 0, 0]} center>
-          <div className="explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap">
+          <div className={clsx("explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap", !isActive && "hidden")}>
             M3 Pro Logic Board
           </div>
         </Html>
@@ -78,7 +80,7 @@ export default function MacbookModel14(props: any) {
       {/* LAYER 2: KEYBOARD DECK */}
       <group name="layer_keyboard">
         <Html position={[0, 2, 5]} center>
-          <div className="explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap">
+          <div className={clsx("explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap", !isActive && "hidden")}>
             Keyboard & Trackpad
           </div>
         </Html>
@@ -91,7 +93,7 @@ export default function MacbookModel14(props: any) {
       {/* LAYER 1: SCREEN */}
       <group name="layer_screen">
         <Html position={[0, -15, -23]} center>
-          <div className="explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap">
+          <div className={clsx("explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap", !isActive && "hidden")}>
             Liquid Retina XDR
           </div>
         </Html>

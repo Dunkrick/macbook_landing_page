@@ -66,8 +66,8 @@ const ProductViewer = () => {
         <div ref={pinRef} id="product-viewer" className="relative h-screen bg-black overflow-hidden">
 
             {/* Title */}
-            <div className="relative top-10 lg:top-12 inset-x-0 z-20 text-center pointer-events-none px-4 md:px-8">
-                <h2 className="text-white font-heading text-4xl md:text-5xl lg:text-7xl uppercase leading-none text-balance mx-auto">
+            <div className="absolute top-24 inset-x-0 z-20 text-center pointer-events-none">
+                <h2 className="text-white font-heading text-5xl lg:text-7xl uppercase leading-none">
                     {titleText}
                 </h2>
                 <p className="text-gray-400 font-sans text-sm mt-3 tracking-widest uppercase">
@@ -79,10 +79,10 @@ const ProductViewer = () => {
 
             {/* 3D Canvas — fills the section */}
             <Canvas
-                camera={{ position: [0, 2, 5], fov: 50, near: 0.1, far: 100 }}
-                className="!absolute !inset-x-0 !bottom-0"
+                camera={{ position: [0, 1.5, 7], fov: 50, near: 0.1, far: 100 }}
+                className="!absolute !inset-0"
                 gl={{ alpha: false, antialias: true }}
-                style={{ background: '#050505', top: '25%', height: '75%' }}
+                style={{ background: '#050505' }}
             >
                 <StudioLights />
                 <Suspense fallback={null}>
