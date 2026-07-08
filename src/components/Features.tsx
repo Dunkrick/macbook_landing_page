@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber"
 import * as THREE from 'three';
 import StudioLights from "./three/StudioLights"
-import { featureSequence, features } from "../constants"
+import { features } from "../constants"
 import clsx from "clsx"
 import { Suspense, useEffect, useRef } from "react"
 import { Html } from "@react-three/drei"
@@ -16,65 +16,16 @@ gsap.registerPlugin(ScrollTrigger)
 
 
 // ModelScroll — The 3D MacBook model that spins as you scroll
-// WHY this is a separate component:
-// It lives INSIDE the <Canvas> (Three.js world), so it needs access to
-// Three.js context (useFrame, refs to 3D objects). Components outside
-// <Canvas> can't access that context. That's why we split it out.
-const ModelScroll = () => {
+// We pass the 3D group ref UP to the parent so the parent can choreograph the GSAP timeline
+const ModelScroll = ({ setGroupNode }: { setGroupNode: (node: THREE.Group) => void }) => {
     const groupRef = useRef<THREE.Group>(null);
     const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
-    const { setTexture } = useMacbookStore();
 
-
-    useGSAP(() => {
-        // Timeline 1: 3D model rotation (pinned, follows scroll)
-        // The model does a full 360° spin as you scroll through this section.
-        const modelTimeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: '#f-canvas',
-                start: 'top top',
-                end: 'bottom top',
-                scrub: 1,
-                pin: true,
-            }
-        });
-
-        // Timeline 2: Feature cards + video texture sync
-        // Each card fades in while the MacBook screen changes to show
-        // the corresponding app. This is scroll-choreography.
-        const timeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: '#f-canvas',
-                start: 'top center',
-                end: 'bottom top',
-                scrub: 1,
-            },
-        });
-
-        // Full 360° rotation
+    useEffect(() => {
         if (groupRef.current) {
-            modelTimeline.to(groupRef.current.rotation, { y: Math.PI * 2, ease: 'power1.inOut' });
+            setGroupNode(groupRef.current);
         }
-
-        // Sync feature cards with video textures on the 3D model screen
-        timeline
-            .call(() => setTexture('/videos/feature-1.mp4'))
-            .to('.box1', { opacity: 1, y: 0, delay: 1 })
-
-            .call(() => setTexture('/videos/feature-2.mp4'))
-            .to('.box2', { opacity: 1, y: 0 })
-
-            .call(() => setTexture('/videos/feature-3.mp4'))
-            .to('.box3', { opacity: 1, y: 0 })
-
-            .call(() => setTexture('/videos/feature-4.mp4'))
-            .to('.box4', { opacity: 1, y: 0 })
-
-            .call(() => setTexture('/videos/feature-5.mp4'))
-            .to('.box5', { opacity: 1, y: 0 })
-
-    }, []);
-
+    }, [setGroupNode]);
 
     return (
         <group ref={groupRef}>
@@ -85,34 +36,75 @@ const ModelScroll = () => {
     )
 }
 
+import { useState } from "react";
+
 const Features = () => {
-    useEffect(() => {
-        // Wait a tick for the canvas to render, then refresh GSAP
-        setTimeout(() => ScrollTrigger.refresh(), 100);
-    }, []);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [groupNode, setGroupNode] = useState<THREE.Group | null>(null);
+    const { setTexture } = useMacbookStore();
+
+    useGSAP(() => {
+        // Only run GSAP once the 3D model is loaded and the ref is passed up
+        if (!groupNode || !containerRef.current) return;
+
+        // ONE master timeline to rule them all.
+        // This prevents multiple pin-spacers and conflicting triggers.
+        const timeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: 'top top',
+                end: '+=400%',
+                scrub: 1,
+                pin: true,
+            }
+        });
+
+        // 1. Rotate the 3D Model continuously across the entire scroll
+        timeline.to(groupNode.rotation, { y: Math.PI * 2, ease: 'none', duration: 5 }, 0);
+
+        // 2. Choreograph the DOM elements and video textures
+        timeline
+            .call(() => setTexture('/videos/feature-1.mp4'))
+            .to('.box1', { opacity: 1, y: 0, duration: 1 }, 0)
+            
+            .call(() => setTexture('/videos/feature-2.mp4'))
+            .to('.box2', { opacity: 1, y: 0, duration: 1 }, 1)
+            
+            .call(() => setTexture('/videos/feature-3.mp4'))
+            .to('.box3', { opacity: 1, y: 0, duration: 1 }, 2)
+            
+            .call(() => setTexture('/videos/feature-4.mp4'))
+            .to('.box4', { opacity: 1, y: 0, duration: 1 }, 3)
+            
+            .call(() => setTexture('/videos/feature-5.mp4'))
+            .to('.box5', { opacity: 1, y: 0, duration: 1 }, 4);
+
+    }, { scope: containerRef, dependencies: [groupNode] });
 
     return (
-        <section id="features" className="bg-sub-paper bg-grain relative border-b-[6px] border-zinc text-zinc grunge-border">
-            <h2 className="text-zinc font-heading text-6xl lg:text-8xl uppercase leading-none text-center max-w-4xl mx-auto drop-shadow-[4px_4px_0px_var(--color-sub-orange)] pt-20">A day on my machine.</h2>
+        <section id="features" className="bg-sub-paper bg-grain border-b-[6px] border-zinc text-zinc grunge-border">
+            <div ref={containerRef} id="features-container" className="relative h-screen overflow-hidden">
+                <h2 className="absolute top-10 inset-x-0 z-20 text-zinc font-heading text-6xl lg:text-8xl uppercase leading-none text-center max-w-4xl mx-auto drop-shadow-[4px_4px_0px_var(--color-sub-orange)] pointer-events-none pt-10">A day on my machine.</h2>
 
-            <Canvas id="f-canvas" camera={{}}>
-                <StudioLights />
-                <ambientLight intensity={0.5} />
-                <ModelScroll />
-            </Canvas>
+                <Canvas id="f-canvas" className="!absolute !inset-0" camera={{}}>
+                    <StudioLights />
+                    <ambientLight intensity={0.5} />
+                    <ModelScroll setGroupNode={setGroupNode} />
+                </Canvas>
 
-            <div className="absolute inset-0 pointer-events-none">
-                {features.map((feature, index) => (
-                    <div key={feature.id} className={clsx('box', `box${index + 1}`, feature.styles, 'bg-white border-4 border-zinc shadow-[12px_12px_0px_var(--color-zinc)] p-6 pointer-events-auto grunge-border')}>
-                        <img src={feature.icon} alt={feature.highlight} className="w-12 h-12 lg:w-16 lg:h-16 mb-4 object-contain" />
-                        <p className="font-sans font-medium text-lg text-zinc/90 mt-2">
-                            <span className="font-bold text-sub-orange bg-sub-orange/10 px-2 py-1 border border-sub-orange mr-2 inline-block">
-                                {feature.highlight}
-                            </span>
-                            {feature.text}
-                        </p>
-                    </div>
-                ))}
+                <div className="absolute inset-0 pointer-events-none z-10">
+                    {features.map((feature, index) => (
+                        <div key={feature.id} className={clsx('absolute box', `box${index + 1}`, feature.styles, 'bg-white border-4 border-zinc shadow-[12px_12px_0px_var(--color-zinc)] p-6 pointer-events-auto grunge-border')}>
+                            <img src={feature.icon} alt={feature.highlight} className="w-12 h-12 lg:w-16 lg:h-16 mb-4 object-contain" />
+                            <p className="font-sans font-medium text-lg text-zinc/90 mt-2">
+                                <span className="font-bold text-sub-orange bg-sub-orange/10 px-2 py-1 border border-sub-orange mr-2 inline-block">
+                                    {feature.highlight}
+                                </span>
+                                {feature.text}
+                            </p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </section>
     )
