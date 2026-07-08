@@ -41,7 +41,7 @@ export default function MacbookModel16(props: any) {
     <group {...restProps} dispose={null}>
       {/* LAYER 5: BOTTOM CHASSIS */}
       <group name="layer_chassis">
-        <Html position={[0, -2, 5]} center>
+        <Html position={[16, -2, 5]} center>
           <div className={clsx("explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap", !isActive && "hidden")}>
             Aluminum Shell
           </div>
@@ -54,7 +54,7 @@ export default function MacbookModel16(props: any) {
 
       {/* LAYER 4: BATTERY & COOLING */}
       <group name="layer_battery">
-        <Html position={[0, -2, -5]} center>
+        <Html position={[-16, -2, -5]} center>
           <div className={clsx("explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap", !isActive && "hidden")}>
             Battery & Cooling
           </div>
@@ -67,7 +67,7 @@ export default function MacbookModel16(props: any) {
 
       {/* LAYER 3: LOGIC BOARD */}
       <group name="layer_logic">
-        <Html position={[0, 0, 0]} center>
+        <Html position={[16, 0, 0]} center>
           <div className={clsx("explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap", !isActive && "hidden")}>
             M3 Pro Logic Board
           </div>
@@ -80,7 +80,7 @@ export default function MacbookModel16(props: any) {
 
       {/* LAYER 2: KEYBOARD DECK */}
       <group name="layer_keyboard">
-        <Html position={[0, 2, 5]} center>
+        <Html position={[-16, 2, 5]} center>
           <div className={clsx("explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap", !isActive && "hidden")}>
             Keyboard & Trackpad
           </div>
@@ -93,7 +93,7 @@ export default function MacbookModel16(props: any) {
 
       {/* LAYER 1: SCREEN */}
       <group name="layer_screen">
-        <Html position={[0, -15, -23]} center>
+        <Html position={[16, 12, -15]} center>
           <div className={clsx("explode-label opacity-0 font-marker text-white bg-zinc px-3 py-1 text-sm border-2 border-zinc shadow-[2px_2px_0px_var(--color-sub-orange)] whitespace-nowrap", !isActive && "hidden")}>
             Liquid Retina XDR
           </div>
