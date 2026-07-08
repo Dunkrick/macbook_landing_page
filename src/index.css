@@ -106,14 +106,6 @@ h4 {
   @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
 }
 
-@utility h3-semibold {
-  @apply font-heading text-xl text-dark-100;
-}
-
-@utility base-semibold {
-  @apply font-heading text-base text-dark-100;
-}
-
 @utility small-medium {
   @apply font-sans text-xs;
 }
