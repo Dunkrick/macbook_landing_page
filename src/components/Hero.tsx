@@ -26,7 +26,7 @@ const Hero = () => {
     });
 
     return (
-        <section className="w-full relative min-h-screen bg-black bg-grain flex flex-col justify-center border-b-[6px] border-sub-orange grunge-border" id="hero">
+        <section className="w-full relative bg-black bg-grain flex flex-col justify-center border-b-[6px] border-sub-orange grunge-border" id="hero">
             <div className="w-full flex-center flex-col z-10 px-6 mt-10">
                 <h1 id="hero-title" className="text-white text-[12vw] font-heading text-center uppercase leading-[0.85] m-0 p-0 relative">
                     My Daily <br/> <span className="text-sub-orange">Driver.</span>

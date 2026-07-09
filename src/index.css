@@ -218,10 +218,10 @@ h4 {
   /* ─────────────────────────────────────────────────────────── */
 
   #hero {
-    @apply h-fit lg:h-[80vh] col-center mt-40 lg:mt-20 2xl:mt-[7vh];
+    @apply h-fit lg:h-[93vh] col-center mt-40 lg:mt-20 2xl:mt-[7vh];
 
     div {
-      @apply relative z-10 col-center lg:translate-y-16;
+      @apply relative z-10 col-center lg:translate-y-5;
 
       h1 {
         @apply font-semibold lg:text-3xl 2xl:text-5xl text-white;
@@ -305,7 +305,7 @@ h4 {
     }
 
     #canvas {
-      @apply !w-full !h-[80vh] lg:!h-dvh relative z-40;
+      @apply !w-full !h-[80vh] lg:h-dvh relative z-40;
     }
   }
 
@@ -319,7 +319,8 @@ h4 {
     .media {
       @apply relative lg:overflow-hidden;
       aspect-ratio: 16 / 9;
-      min-height: 56.25vw; /* strict fallback for 16:9 on full width */
+      min-height: 56.25vw;
+      /* strict fallback for 16:9 on full width */
       background-color: #000;
 
       video {
