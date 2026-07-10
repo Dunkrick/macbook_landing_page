@@ -416,28 +416,12 @@ h4 {
     }
   }
 
-  /* ─────────────────────────────────────────────────────────── */
-  /* FEATURES (Daily Workflow + 3D Model)                        */
-  /* ─────────────────────────────────────────────────────────── */
+  /* ───────────────────────────────────────────────────────────── */
+  /* FEATURES — macOS Desktop Sim                               */
+  /* ───────────────────────────────────────────────────────────── */
 
   #features {
-    @apply relative;
-
-    h2 {
-      @apply text-white font-semibold text-3xl lg:text-7xl text-center max-w-3xl mx-auto;
-    }
-
-    #f-canvas {
-      @apply !w-full !h-dvh relative z-10;
-    }
-
-    .box {
-      @apply max-w-xs absolute;
-
-      p {
-        @apply font-heading text-dark-100 text-base lg:text-xl;
-      }
-    }
+    @apply relative overflow-hidden;
   }
 
   /* ─────────────────────────────────────────────────────────── */
