@@ -6,18 +6,43 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 gsap.registerPlugin(ScrollTrigger)
 
-// ── Live clock for the fake menu bar ──────────────────────────
-const LiveClock = () => {
+// ── Live Stats for the fake menu bar (Battery, Day, Time) ──
+const LiveStats = () => {
     const [time, setTime] = useState(() =>
         new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
     );
+    const [day, setDay] = useState(() =>
+        new Date().toLocaleDateString('en-US', { weekday: 'short' })
+    );
+    const [battery, setBattery] = useState("94%");
+
     useEffect(() => {
-        const t = setInterval(() =>
-            setTime(new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }))
-        , 1000);
+        // Update time and day every second
+        const t = setInterval(() => {
+            const now = new Date();
+            setTime(now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }));
+            setDay(now.toLocaleDateString('en-US', { weekday: 'short' }));
+        }, 1000);
+
+        // Try getting real battery status if browser supports it
+        if ('getBattery' in navigator) {
+            (navigator as any).getBattery().then((batt: any) => {
+                const updateBattery = () => setBattery(`${Math.round(batt.level * 100)}%`);
+                updateBattery(); // initial set
+                batt.addEventListener('levelchange', updateBattery);
+            }).catch(() => {});
+        }
+
         return () => clearInterval(t);
     }, []);
-    return <span>{time}</span>;
+
+    return (
+        <div className="flex items-center gap-3 text-[11px]" style={{ color: 'rgba(255,255,255,0.5)' }}>
+            <span>🔋 {battery}</span>
+            <span className="hidden md:inline">{day}</span>
+            <span>{time}</span>
+        </div>
+    );
 };
 
 // ── Speech bubble tail component ──────────────────────────────
@@ -99,7 +124,8 @@ const Features = () => {
                 className="flex flex-col"
                 style={{
                     height: 'calc(100vh - 85px)',
-                    background: 'radial-gradient(ellipse at 50% 105%, rgba(249,115,22,0.12) 0%, rgba(249,115,22,0.03) 40%, #080810 65%)',
+                    // Subtle, premium macOS dark mode style abstract gradient
+                    background: 'radial-gradient(circle at 85% 15%, rgba(90, 40, 140, 0.25), transparent 40%), radial-gradient(circle at 15% 85%, rgba(249, 115, 22, 0.15), transparent 50%), #0a0812',
                 }}
             >
                 {/* ── Fake macOS Menu Bar ── */}
@@ -122,11 +148,7 @@ const Features = () => {
                         <span className="text-white/30 text-[11px] hidden md:inline">Edit</span>
                         <span className="text-white/30 text-[11px] hidden md:inline">View</span>
                     </div>
-                    <div className="flex items-center gap-3 text-[11px]" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                        <span>🔋 94%</span>
-                        <span className="hidden md:inline">Wed</span>
-                        <LiveClock />
-                    </div>
+                    <LiveStats />
                 </div>
 
                 {/* ── Main desktop area ── */}
