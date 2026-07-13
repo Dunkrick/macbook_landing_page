@@ -30,17 +30,26 @@ const moveGroup = (group: THREE.Group | null, x: number) => {
 declare global { interface Window { __pvScroll?: number } }
 
 // ─── types ───────────────────────────────────────────────────────────────────
-interface ModelSwitcherProps { scale: number; isMobile: boolean; }
+interface ModelSwitcherProps { scale: number; isMobile: boolean; isTablet: boolean; }
 
 // ─── component ───────────────────────────────────────────────────────────────
-const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
+const ModelSwitcher = ({ scale, isMobile, isTablet }: ModelSwitcherProps) => {
     const SCALE_LARGE_DESKTOP = 0.08;
-    const SCALE_LARGE_MOBILE  = 0.05;
+    const SCALE_LARGE_TABLET  = 0.065;
+    const SCALE_LARGE_MOBILE  = 0.045;
+
+    const SCALE_SMALL_DESKTOP = 0.06;
+    const SCALE_SMALL_TABLET  = 0.05;
+    const SCALE_SMALL_MOBILE  = 0.035;
 
     const smallRef = useRef<THREE.Group>(null);
     const largeRef = useRef<THREE.Group>(null);
 
-    const showLarge = scale === SCALE_LARGE_DESKTOP || scale === SCALE_LARGE_MOBILE;
+    // The store always sets scale to either 0.08 (16") or 0.06 (14")
+    const showLarge = scale === SCALE_LARGE_DESKTOP;
+    
+    const currentScaleLarge = isMobile ? SCALE_LARGE_MOBILE : isTablet ? SCALE_LARGE_TABLET : SCALE_LARGE_DESKTOP;
+    const currentScaleSmall = isMobile ? SCALE_SMALL_MOBILE : isTablet ? SCALE_SMALL_TABLET : SCALE_SMALL_DESKTOP;
 
     // ── switch model on scale change ─────────────────────────────────────────
     useGSAP(() => {
@@ -84,10 +93,10 @@ const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
     return (
         <group position={[0, -1, 0]}>
             <group ref={largeRef}>
-                <MacbookModel16 scale={isMobile ? SCALE_LARGE_MOBILE : SCALE_LARGE_DESKTOP} isActive={showLarge} />
+                <MacbookModel16 scale={currentScaleLarge} isActive={showLarge} />
             </group>
             <group ref={smallRef} position={[OFFSET_DISTANCE, 0, 0]}>
-                <MacbookModel14 scale={isMobile ? 0.03 : 0.06} isActive={!showLarge} />
+                <MacbookModel14 scale={currentScaleSmall} isActive={!showLarge} />
             </group>
         </group>
     );

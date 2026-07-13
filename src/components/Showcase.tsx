@@ -8,13 +8,13 @@ import { chipInsights, mySpecs } from "../constants";
 gsap.registerPlugin(ScrollTrigger);
 
 const Showcase = () => {
-    const isTablet = useMediaQuery({ query: '(max-width: 1024px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
     const maskImgRef = useRef<HTMLImageElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const sectionRef = useRef<HTMLElement>(null);
 
     useGSAP(() => {
-        if (!isTablet) {
+        if (!isMobile) {
             // SVG mask reveal — the logo scales from huge (filling screen) to small (revealing video)
             // WHY: This is one of the most cinematic scroll animations possible.
             // The mask starts scaled to 80x (fills the viewport as a solid shape),
@@ -36,7 +36,7 @@ const Showcase = () => {
                     { scale: 1.1 }
                 ).to(contentRef.current, { opacity: 1, y: 0, ease: 'power1.in' });
         }
-    }, [isTablet]);
+    }, [isMobile]);
 
     return (
         <section id="showcase" className="border-b-[6px] border-zinc bg-sub-blue bg-grain relative text-white" ref={sectionRef}>

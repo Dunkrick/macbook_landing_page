@@ -6,7 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import clsx from "clsx";
 
 const Performance = () => {
-    const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
+    const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
     const sectionRef = useRef<HTMLElement>(null);
 
     useGSAP(

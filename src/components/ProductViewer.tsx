@@ -17,7 +17,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ProductViewer = () => {
     const { color, scale, setColor, setScale } = useMacbookStore();
-    const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
+    const isTablet = useMediaQuery({ query: '(min-width: 768px) and (max-width: 1024px)' });
     const pinRef   = useRef<HTMLDivElement>(null);
 
     // ── DOM-side GSAP: pin the section and write scroll progress to window ──
@@ -86,7 +87,7 @@ const ProductViewer = () => {
             >
                 <StudioLights />
                 <Suspense fallback={null}>
-                    <ModelSwitcher scale={isMobile ? scale - 0.03 : scale} isMobile={isMobile} />
+                    <ModelSwitcher scale={scale} isMobile={isMobile} isTablet={isTablet} />
                 </Suspense>
                 <OrbitControls 
                     enableZoom={false} 
